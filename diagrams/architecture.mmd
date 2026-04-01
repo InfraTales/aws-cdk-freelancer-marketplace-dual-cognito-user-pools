@@ -1,0 +1,19 @@
+graph TD
+    subgraph AWS["AWS Cloud"]
+        DDB[(DynamoDB)]
+        Aurora[(Aurora)]
+        S3[(S3)]
+        CF[CloudFront]
+        SNS[SNS Topic]
+        SF[Step Functions]
+        ECS[ECS Fargate]
+    end
+
+    Lambda --> DDB
+    DDB --> Aurora
+    Aurora --> S3
+    S3 --> CF
+    CF --> SNS
+    SNS --> SF
+    SF --> ECS
+    Aurora -.->|metrics| CW[CloudWatch]
